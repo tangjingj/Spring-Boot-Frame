@@ -1,5 +1,5 @@
 # Spring-Boot-Frame
-一个基本spring boot集成了多种功能的框架
+一个基本spring boot集成了多种功能的框架,后续会再添加一些常用功能
 
 1.spring boot集成的web模块
 
