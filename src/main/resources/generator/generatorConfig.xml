@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<!--生成sql语句的maven命令 mybatis-generator:generate -e -->
+<!--注意同一张表一定不要运行多次，因为mapper的映射文件中会生成多次的代码,会造成代码重复-->
+<!-- 根据数据库表生成实体类及mapper -->
+<generatorConfiguration>
+     <properties resource="application.yml" />
+    <classPathEntry
+            location="C:\Users\TJJ\.m2\repository\mysql\mysql-connector-java\8.0.16\mysql-connector-java-8.0.16.jar" />
+    <context id="mysql" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!-- 删除代码中带有 代码生成器的注释信息 -->
+            <property name="suppressAllComments" value="true" />
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+        <!--数据库地址 账号 密码-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://rm-bp1x0pg4z9g5d7knmno.mysql.rds.aliyuncs.com:3306/intelligent_parking?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=TRUE"
+                        userId="root" password="xcs@2018" />
+        <!--是否启用java.math.BigDecimal-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true" />
+        </javaTypeResolver>
+
+        <!-- 生成模型的包名和位置 -->
+        <javaModelGenerator targetPackage="com.example.demo.model"
+                            targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="false" />
+            <!-- <property name="trimStrings" value="true" /> -->
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="src\main\resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.example.demo.mapper"
+                             targetProject="src\main\java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- tableName是数据库的表名，domainObjectName是生成的实体类名称 -->
+        <table tableName="park_user" domainObjectName="ParkUser"></table>
+        <table tableName="device" domainObjectName="Device"></table>
+    </context>
+</generatorConfiguration>

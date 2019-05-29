@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.ParkUserMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.model.ParkUser" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="from_type" property="fromType" jdbcType="INTEGER" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="order_count" property="orderCount" jdbcType="INTEGER" />
+    <result column="expense" property="expense" jdbcType="DECIMAL" />
+    <result column="margin" property="margin" jdbcType="DECIMAL" />
+    <result column="margin_id" property="marginId" jdbcType="INTEGER" />
+    <result column="auto_open" property="autoOpen" jdbcType="INTEGER" />
+    <result column="contract_id" property="contractId" jdbcType="VARCHAR" />
+    <result column="agreement_no" property="agreementNo" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+    <result column="login_count" property="loginCount" jdbcType="INTEGER" />
+    <result column="last_login_from" property="lastLoginFrom" jdbcType="INTEGER" />
+    <result column="last_login_at" property="lastLoginAt" jdbcType="TIMESTAMP" />
+    <result column="current_order" property="currentOrder" jdbcType="INTEGER" />
+    <result column="last_order" property="lastOrder" jdbcType="INTEGER" />
+    <result column="from_agent_id" property="fromAgentId" jdbcType="INTEGER" />
+    <result column="from_stand_id" property="fromStandId" jdbcType="INTEGER" />
+    <result column="credit" property="credit" jdbcType="INTEGER" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="wallet" property="wallet" jdbcType="DECIMAL" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, openid, from_type, mobile, password, nickname, avatar, order_count, expense, 
+    margin, margin_id, auto_open, contract_id, agreement_no, is_del, login_count, last_login_from, 
+    last_login_at, current_order, last_order, from_agent_id, from_stand_id, credit, created_at, 
+    updated_at, wallet, gender
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.model.ParkUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from park_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.example.demo.model.ParkUserExample" >
+    delete from park_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.ParkUser" >
+    insert into park_user (id, openid, from_type, 
+      mobile, password, nickname, 
+      avatar, order_count, expense, 
+      margin, margin_id, auto_open, 
+      contract_id, agreement_no, is_del, 
+      login_count, last_login_from, last_login_at, 
+      current_order, last_order, from_agent_id, 
+      from_stand_id, credit, created_at, 
+      updated_at, wallet, gender
+      )
+    values (#{id,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, #{fromType,jdbcType=INTEGER}, 
+      #{mobile,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{orderCount,jdbcType=INTEGER}, #{expense,jdbcType=DECIMAL}, 
+      #{margin,jdbcType=DECIMAL}, #{marginId,jdbcType=INTEGER}, #{autoOpen,jdbcType=INTEGER}, 
+      #{contractId,jdbcType=VARCHAR}, #{agreementNo,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER}, 
+      #{loginCount,jdbcType=INTEGER}, #{lastLoginFrom,jdbcType=INTEGER}, #{lastLoginAt,jdbcType=TIMESTAMP}, 
+      #{currentOrder,jdbcType=INTEGER}, #{lastOrder,jdbcType=INTEGER}, #{fromAgentId,jdbcType=INTEGER}, 
+      #{fromStandId,jdbcType=INTEGER}, #{credit,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{wallet,jdbcType=DECIMAL}, #{gender,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.ParkUser" >
+    insert into park_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="fromType != null" >
+        from_type,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+      <if test="orderCount != null" >
+        order_count,
+      </if>
+      <if test="expense != null" >
+        expense,
+      </if>
+      <if test="margin != null" >
+        margin,
+      </if>
+      <if test="marginId != null" >
+        margin_id,
+      </if>
+      <if test="autoOpen != null" >
+        auto_open,
+      </if>
+      <if test="contractId != null" >
+        contract_id,
+      </if>
+      <if test="agreementNo != null" >
+        agreement_no,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="loginCount != null" >
+        login_count,
+      </if>
+      <if test="lastLoginFrom != null" >
+        last_login_from,
+      </if>
+      <if test="lastLoginAt != null" >
+        last_login_at,
+      </if>
+      <if test="currentOrder != null" >
+        current_order,
+      </if>
+      <if test="lastOrder != null" >
+        last_order,
+      </if>
+      <if test="fromAgentId != null" >
+        from_agent_id,
+      </if>
+      <if test="fromStandId != null" >
+        from_stand_id,
+      </if>
+      <if test="credit != null" >
+        credit,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="wallet != null" >
+        wallet,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="fromType != null" >
+        #{fromType,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCount != null" >
+        #{orderCount,jdbcType=INTEGER},
+      </if>
+      <if test="expense != null" >
+        #{expense,jdbcType=DECIMAL},
+      </if>
+      <if test="margin != null" >
+        #{margin,jdbcType=DECIMAL},
+      </if>
+      <if test="marginId != null" >
+        #{marginId,jdbcType=INTEGER},
+      </if>
+      <if test="autoOpen != null" >
+        #{autoOpen,jdbcType=INTEGER},
+      </if>
+      <if test="contractId != null" >
+        #{contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementNo != null" >
+        #{agreementNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="loginCount != null" >
+        #{loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginFrom != null" >
+        #{lastLoginFrom,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginAt != null" >
+        #{lastLoginAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentOrder != null" >
+        #{currentOrder,jdbcType=INTEGER},
+      </if>
+      <if test="lastOrder != null" >
+        #{lastOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fromAgentId != null" >
+        #{fromAgentId,jdbcType=INTEGER},
+      </if>
+      <if test="fromStandId != null" >
+        #{fromStandId,jdbcType=INTEGER},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="wallet != null" >
+        #{wallet,jdbcType=DECIMAL},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.demo.model.ParkUserExample" resultType="java.lang.Integer" >
+    select count(*) from park_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update park_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.openid != null" >
+        openid = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromType != null" >
+        from_type = #{record.fromType,jdbcType=INTEGER},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null" >
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avatar != null" >
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderCount != null" >
+        order_count = #{record.orderCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.expense != null" >
+        expense = #{record.expense,jdbcType=DECIMAL},
+      </if>
+      <if test="record.margin != null" >
+        margin = #{record.margin,jdbcType=DECIMAL},
+      </if>
+      <if test="record.marginId != null" >
+        margin_id = #{record.marginId,jdbcType=INTEGER},
+      </if>
+      <if test="record.autoOpen != null" >
+        auto_open = #{record.autoOpen,jdbcType=INTEGER},
+      </if>
+      <if test="record.contractId != null" >
+        contract_id = #{record.contractId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agreementNo != null" >
+        agreement_no = #{record.agreementNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDel != null" >
+        is_del = #{record.isDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginCount != null" >
+        login_count = #{record.loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastLoginFrom != null" >
+        last_login_from = #{record.lastLoginFrom,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastLoginAt != null" >
+        last_login_at = #{record.lastLoginAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.currentOrder != null" >
+        current_order = #{record.currentOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastOrder != null" >
+        last_order = #{record.lastOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.fromAgentId != null" >
+        from_agent_id = #{record.fromAgentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fromStandId != null" >
+        from_stand_id = #{record.fromStandId,jdbcType=INTEGER},
+      </if>
+      <if test="record.credit != null" >
+        credit = #{record.credit,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.wallet != null" >
+        wallet = #{record.wallet,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update park_user
+    set id = #{record.id,jdbcType=INTEGER},
+      openid = #{record.openid,jdbcType=VARCHAR},
+      from_type = #{record.fromType,jdbcType=INTEGER},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR},
+      order_count = #{record.orderCount,jdbcType=INTEGER},
+      expense = #{record.expense,jdbcType=DECIMAL},
+      margin = #{record.margin,jdbcType=DECIMAL},
+      margin_id = #{record.marginId,jdbcType=INTEGER},
+      auto_open = #{record.autoOpen,jdbcType=INTEGER},
+      contract_id = #{record.contractId,jdbcType=VARCHAR},
+      agreement_no = #{record.agreementNo,jdbcType=VARCHAR},
+      is_del = #{record.isDel,jdbcType=INTEGER},
+      login_count = #{record.loginCount,jdbcType=INTEGER},
+      last_login_from = #{record.lastLoginFrom,jdbcType=INTEGER},
+      last_login_at = #{record.lastLoginAt,jdbcType=TIMESTAMP},
+      current_order = #{record.currentOrder,jdbcType=INTEGER},
+      last_order = #{record.lastOrder,jdbcType=INTEGER},
+      from_agent_id = #{record.fromAgentId,jdbcType=INTEGER},
+      from_stand_id = #{record.fromStandId,jdbcType=INTEGER},
+      credit = #{record.credit,jdbcType=INTEGER},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      wallet = #{record.wallet,jdbcType=DECIMAL},
+      gender = #{record.gender,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.DeviceMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.Device">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="stand_id" jdbcType="INTEGER" property="standId" />
+    <result column="rule_id" jdbcType="INTEGER" property="ruleId" />
+    <result column="agent_id" jdbcType="INTEGER" property="agentId" />
+    <result column="device_code" jdbcType="VARCHAR" property="deviceCode" />
+    <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
+    <result column="ali_device_id" jdbcType="VARCHAR" property="aliDeviceId" />
+    <result column="ali_device_secret" jdbcType="VARCHAR" property="aliDeviceSecret" />
+    <result column="device_qr_img" jdbcType="VARCHAR" property="deviceQrImg" />
+    <result column="device_status" jdbcType="INTEGER" property="deviceStatus" />
+    <result column="operator_status" jdbcType="INTEGER" property="operatorStatus" />
+    <result column="online_status" jdbcType="INTEGER" property="onlineStatus" />
+    <result column="lng" jdbcType="DECIMAL" property="lng" />
+    <result column="lat" jdbcType="DECIMAL" property="lat" />
+    <result column="order_count" jdbcType="INTEGER" property="orderCount" />
+    <result column="service_count" jdbcType="INTEGER" property="serviceCount" />
+    <result column="statustime" jdbcType="TIMESTAMP" property="statustime" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="p_type" jdbcType="INTEGER" property="pType" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, stand_id, rule_id, agent_id, device_code, device_name, ali_device_id, ali_device_secret, 
+    device_qr_img, device_status, operator_status, online_status, lng, lat, order_count, 
+    service_count, statustime, created_at, updated_at, address, p_type
+  </sql>
+  <select id="selectByExample" parameterType="com.example.demo.model.DeviceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.example.demo.model.DeviceExample">
+    delete from device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.Device">
+    insert into device (id, stand_id, rule_id, 
+      agent_id, device_code, device_name, 
+      ali_device_id, ali_device_secret, device_qr_img, 
+      device_status, operator_status, online_status, 
+      lng, lat, order_count, 
+      service_count, statustime, created_at, 
+      updated_at, address, p_type
+      )
+    values (#{id,jdbcType=INTEGER}, #{standId,jdbcType=INTEGER}, #{ruleId,jdbcType=INTEGER}, 
+      #{agentId,jdbcType=INTEGER}, #{deviceCode,jdbcType=VARCHAR}, #{deviceName,jdbcType=VARCHAR}, 
+      #{aliDeviceId,jdbcType=VARCHAR}, #{aliDeviceSecret,jdbcType=VARCHAR}, #{deviceQrImg,jdbcType=VARCHAR}, 
+      #{deviceStatus,jdbcType=INTEGER}, #{operatorStatus,jdbcType=INTEGER}, #{onlineStatus,jdbcType=INTEGER}, 
+      #{lng,jdbcType=DECIMAL}, #{lat,jdbcType=DECIMAL}, #{orderCount,jdbcType=INTEGER}, 
+      #{serviceCount,jdbcType=INTEGER}, #{statustime,jdbcType=TIMESTAMP}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR}, #{pType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.Device">
+    insert into device
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="standId != null">
+        stand_id,
+      </if>
+      <if test="ruleId != null">
+        rule_id,
+      </if>
+      <if test="agentId != null">
+        agent_id,
+      </if>
+      <if test="deviceCode != null">
+        device_code,
+      </if>
+      <if test="deviceName != null">
+        device_name,
+      </if>
+      <if test="aliDeviceId != null">
+        ali_device_id,
+      </if>
+      <if test="aliDeviceSecret != null">
+        ali_device_secret,
+      </if>
+      <if test="deviceQrImg != null">
+        device_qr_img,
+      </if>
+      <if test="deviceStatus != null">
+        device_status,
+      </if>
+      <if test="operatorStatus != null">
+        operator_status,
+      </if>
+      <if test="onlineStatus != null">
+        online_status,
+      </if>
+      <if test="lng != null">
+        lng,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="orderCount != null">
+        order_count,
+      </if>
+      <if test="serviceCount != null">
+        service_count,
+      </if>
+      <if test="statustime != null">
+        statustime,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="pType != null">
+        p_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="standId != null">
+        #{standId,jdbcType=INTEGER},
+      </if>
+      <if test="ruleId != null">
+        #{ruleId,jdbcType=INTEGER},
+      </if>
+      <if test="agentId != null">
+        #{agentId,jdbcType=INTEGER},
+      </if>
+      <if test="deviceCode != null">
+        #{deviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null">
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="aliDeviceId != null">
+        #{aliDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="aliDeviceSecret != null">
+        #{aliDeviceSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceQrImg != null">
+        #{deviceQrImg,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStatus != null">
+        #{deviceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="operatorStatus != null">
+        #{operatorStatus,jdbcType=INTEGER},
+      </if>
+      <if test="onlineStatus != null">
+        #{onlineStatus,jdbcType=INTEGER},
+      </if>
+      <if test="lng != null">
+        #{lng,jdbcType=DECIMAL},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=DECIMAL},
+      </if>
+      <if test="orderCount != null">
+        #{orderCount,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCount != null">
+        #{serviceCount,jdbcType=INTEGER},
+      </if>
+      <if test="statustime != null">
+        #{statustime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="pType != null">
+        #{pType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.demo.model.DeviceExample" resultType="java.lang.Integer">
+    select count(*) from device
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update device
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.standId != null">
+        stand_id = #{record.standId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ruleId != null">
+        rule_id = #{record.ruleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.agentId != null">
+        agent_id = #{record.agentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deviceCode != null">
+        device_code = #{record.deviceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceName != null">
+        device_name = #{record.deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aliDeviceId != null">
+        ali_device_id = #{record.aliDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aliDeviceSecret != null">
+        ali_device_secret = #{record.aliDeviceSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceQrImg != null">
+        device_qr_img = #{record.deviceQrImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceStatus != null">
+        device_status = #{record.deviceStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.operatorStatus != null">
+        operator_status = #{record.operatorStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.onlineStatus != null">
+        online_status = #{record.onlineStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.lng != null">
+        lng = #{record.lng,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lat != null">
+        lat = #{record.lat,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderCount != null">
+        order_count = #{record.orderCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceCount != null">
+        service_count = #{record.serviceCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.statustime != null">
+        statustime = #{record.statustime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pType != null">
+        p_type = #{record.pType,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update device
+    set id = #{record.id,jdbcType=INTEGER},
+      stand_id = #{record.standId,jdbcType=INTEGER},
+      rule_id = #{record.ruleId,jdbcType=INTEGER},
+      agent_id = #{record.agentId,jdbcType=INTEGER},
+      device_code = #{record.deviceCode,jdbcType=VARCHAR},
+      device_name = #{record.deviceName,jdbcType=VARCHAR},
+      ali_device_id = #{record.aliDeviceId,jdbcType=VARCHAR},
+      ali_device_secret = #{record.aliDeviceSecret,jdbcType=VARCHAR},
+      device_qr_img = #{record.deviceQrImg,jdbcType=VARCHAR},
+      device_status = #{record.deviceStatus,jdbcType=INTEGER},
+      operator_status = #{record.operatorStatus,jdbcType=INTEGER},
+      online_status = #{record.onlineStatus,jdbcType=INTEGER},
+      lng = #{record.lng,jdbcType=DECIMAL},
+      lat = #{record.lat,jdbcType=DECIMAL},
+      order_count = #{record.orderCount,jdbcType=INTEGER},
+      service_count = #{record.serviceCount,jdbcType=INTEGER},
+      statustime = #{record.statustime,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      address = #{record.address,jdbcType=VARCHAR},
+      p_type = #{record.pType,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+</mapper>
