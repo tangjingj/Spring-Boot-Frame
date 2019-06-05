@@ -5,9 +5,12 @@ import com.example.demo.entity.SysUser;
 import com.example.demo.mapper.DemoMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * demo 接口开发
+ */
 
 @Slf4j
 @RestController
@@ -24,4 +27,6 @@ public class DemoController {
         log.info("测试");
         return user.getNickname();
     }
+
+
 }

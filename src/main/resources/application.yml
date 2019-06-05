@@ -30,8 +30,19 @@ spring:
           test-on-return: false
           connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       driver-class-name: com.mysql.cj.jdbc.Driver
+   #freemarker配置
+   freemarker:
+      template-loader-path: classpath:/web/
+      cache: false
+      charset: UTF-8
+      check-template-location: true
+      content-type: text/html
+      expose-request-attributes: true
+      expose-session-attributes: true
+      request-context-attribute: request
+      suffix: .ftl
 
-    
+
 redis:
     host: 127.0.0.1
     port: 6379
@@ -56,6 +67,8 @@ logging:
     level:
         #控制台打印sql语句
         com.example.demo.mapper: debug
+
+
 
 
 
