@@ -132,6 +132,12 @@
 			<optional>true</optional>
 			<scope>true</scope>
 		</dependency>
+		<!--使用IkAnalyzer分词器统计中文高频词汇-->
+		<dependency>
+			<groupId>com.janeluo</groupId>
+			<artifactId>ikanalyzer</artifactId>
+			<version>2012_u6</version>
+		</dependency>
 
 	</dependencies>
 

@@ -19,7 +19,7 @@
         </commentGenerator>
         <!--数据库地址 账号 密码-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://rm-bp1x0pg4z9g5d7knmno.mysql.rds.aliyuncs.com:3306/intelligent_parking?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=TRUE"
+                        connectionURL="jdbc:mysql://rm-bp1x0pg4z9g5d7knmno.mysql.rds.aliyuncs.com:3306/uwb?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=TRUE"
                         userId="root" password="xcs@2018" />
         <!--是否启用java.math.BigDecimal-->
         <javaTypeResolver>
@@ -45,7 +45,7 @@
         </javaClientGenerator>
 
         <!-- tableName是数据库的表名，domainObjectName是生成的实体类名称 -->
-        <table tableName="park_user" domainObjectName="ParkUser"></table>
-        <table tableName="device" domainObjectName="Device"></table>
+        <table tableName="t_b_client_label"></table>
+        <!--<table tableName="device" domainObjectName="Device"></table>-->
     </context>
 </generatorConfiguration>
