@@ -2,6 +2,11 @@ package com.example.demo.base;
 
 import com.alibaba.fastjson.JSONObject;
 
+/**
+ * 通用返回类型
+ * @author: tjj
+ * @param <T>
+ */
 public class ResultDto<T> {
 
     public static final Integer CODE_SUCC = 0;
